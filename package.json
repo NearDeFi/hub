@@ -4,6 +4,7 @@
   "homepage": "/",
   "private": true,
   "dependencies": {
+    "@aurora-is-near/engine": "git://github.com/NearDeFi/aurora.js#support-es6",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -17,7 +18,7 @@
     "error-polyfill": "^0.1.2",
     "local-storage": "^2.0.0",
     "moment": "^2.29.1",
-    "near-api-js": "^0.41.0",
+    "near-api-js": "^0.44.0",
     "node-sass": "^4.0.0",
     "react": "^16.13.1",
     "react-chartjs-2": "^3.0.3",

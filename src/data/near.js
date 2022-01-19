@@ -1,6 +1,7 @@
 import * as nearAPI from "near-api-js";
 import { singletonHook } from "react-singleton-hook";
 import Big from "big.js";
+import { Engine } from "@aurora-is-near/engine/lib/engine";
 
 export const TGas = Big(10).pow(12);
 export const MaxGasPerTransaction = TGas.mul(300);
@@ -24,6 +25,7 @@ const TestNearConfig = {
   walletUrl: "https://wallet.testnet.near.org",
   storageCostPerByte: StorageCostPerByte,
   wrapNearAccountId: "wrap.testnet",
+  auroraContractId: "aurora",
 };
 const MainnetContract = "wiki.near";
 export const MainNearConfig = {
@@ -34,6 +36,7 @@ export const MainNearConfig = {
   walletUrl: "https://wallet.near.org",
   storageCostPerByte: StorageCostPerByte,
   wrapNearAccountId: "wrap.near",
+  auroraContractId: "aurora",
 };
 
 export const NearConfig = IsMainnet ? MainNearConfig : TestNearConfig;
@@ -69,9 +72,7 @@ async function _initNear() {
     _near.account,
     NearConfig.contractName,
     {
-      viewMethods: [
-
-      ],
+      viewMethods: [],
       changeMethods: [],
     }
   );
@@ -159,6 +160,14 @@ async function _initNear() {
       JSON.parse(Buffer.from(result.result).toString())
     );
   };
+
+  _near.aurora = new Engine(
+    _near.walletConnection,
+    keyStore,
+    _near.account,
+    NearConfig.networkId,
+    NearConfig.auroraContractId
+  );
 
   return _near;
 }
