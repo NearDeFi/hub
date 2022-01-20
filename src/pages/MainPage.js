@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dashboard from "../components/Dashboard/Dashboard";
+import { useAccount } from "../data/account";
+import { AccountID } from "@aurora-is-near/engine";
 
 export default function MainPage(props) {
-  const [address, setAddress] = useState(
-    "0x05b693a7Ee103F9b0a3914ae73b41B6694F61e57"
-  );
+  const [address, setAddress] = useState("");
+
+  const account = useAccount();
+
+  const accountId = account && account.accountId;
+  useEffect(() => {
+    if (accountId) {
+      const address = new AccountID(accountId).toAddress().toString();
+      console.log(address);
+      setAddress(address);
+    }
+  }, [accountId]);
 
   const onAddressChange = (e) => {
     setAddress(e.target.value);

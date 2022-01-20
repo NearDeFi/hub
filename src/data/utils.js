@@ -13,6 +13,7 @@ const MinAccountIdLen = 2;
 const MaxAccountIdLen = 64;
 const ValidAccountRe = /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/;
 export const OneNear = Big(10).pow(24);
+export const OneEth = Big(10).pow(18);
 const AccountSafetyMargin = OneNear.div(2);
 
 export const Loading = (

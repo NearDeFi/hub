@@ -31,18 +31,28 @@ export const useErc20Balances = (accountAddress, tokenAddresses) => {
   const [tokenBalances, setTokenBalances] = useState(null);
 
   useEffect(() => {
+    console.log("Fetching tokens");
     if (!aurora || !accountAddress || !tokenAddresses) {
       setTokenBalances(null);
       return;
     }
 
-    setTokenBalances({});
+    const currentAccountAddress = accountAddress;
+
+    setTokenBalances(
+      tokenAddresses.reduce((obj, tokenAddress) => {
+        obj[tokenAddress] = null;
+        return obj;
+      }, {})
+    );
     tokenAddresses.forEach((tokenAddress) => {
       fetchErc20Balance(aurora, accountAddress, tokenAddress).then(
         (balance) => {
-          setTokenBalances((state) =>
-            Object.assign({}, state, { [tokenAddress]: balance })
-          );
+          if (currentAccountAddress === accountAddress) {
+            setTokenBalances((state) =>
+              Object.assign({}, state, { [tokenAddress]: balance })
+            );
+          }
         }
       );
     });

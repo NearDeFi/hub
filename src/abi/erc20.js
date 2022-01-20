@@ -219,4 +219,22 @@ export const Erc20Abi = [
     name: "Transfer",
     type: "event",
   },
+  {
+    constant: false,
+    inputs: [
+      {
+        name: "recipient",
+        type: "bytes",
+      },
+      {
+        name: "amount",
+        type: "uint256",
+      },
+    ],
+    name: "withdrawToNear",
+    outputs: [],
+    payable: false,
+    stateMutability: "nonpayable",
+    type: "function",
+  },
 ];

@@ -17,7 +17,7 @@ export const randomPublicKey = nearAPI.utils.PublicKey.from(
 // const isLocalhost = window.location.hostname === "localhost";
 
 export const IsMainnet = true;
-const TestnetContract = "wiki.testnet";
+const TestnetContract = "aurora";
 const TestNearConfig = {
   networkId: "testnet",
   nodeUrl: "https://rpc.testnet.near.org",
@@ -28,7 +28,7 @@ const TestNearConfig = {
   wrapNearAccountId: "wrap.testnet",
   auroraContractId: "aurora",
 };
-const MainnetContract = "wiki.near";
+const MainnetContract = "aurora";
 export const MainNearConfig = {
   networkId: "mainnet",
   nodeUrl: "https://rpc.mainnet.near.org",
@@ -45,6 +45,7 @@ export const LsKey = NearConfig.contractName + ":v01:";
 
 async function _initNear() {
   const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
+  keyStore.reKey = () => {};
   const nearConnection = await nearAPI.connect(
     Object.assign({ deps: { keyStore } }, NearConfig)
   );
