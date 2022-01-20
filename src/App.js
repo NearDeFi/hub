@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "./App.scss";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import { NearConfig, useNear } from "./data/near";
+import { NearConfig, useNearPromise } from "./data/near";
 import MainPage from "./pages/MainPage";
 
 function App(props) {
@@ -12,7 +12,7 @@ function App(props) {
   const [signedIn, setSignedIn] = useState(false);
   const [signedAccountId, setSignedAccountId] = useState(null);
 
-  const _near = useNear();
+  const _near = useNearPromise();
 
   const requestSignIn = useCallback(
     async (e) => {
@@ -91,11 +91,7 @@ function App(props) {
       <Router basename={process.env.PUBLIC_URL}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
           <div className="container-fluid">
-            <a
-              className="navbar-brand"
-              href="https://wiki"
-              title="wiki"
-            >
+            <a className="navbar-brand" href="https://wiki" title="wiki">
               wiki
             </a>
             <button

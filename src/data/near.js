@@ -2,6 +2,7 @@ import * as nearAPI from "near-api-js";
 import { singletonHook } from "react-singleton-hook";
 import Big from "big.js";
 import { Engine } from "@aurora-is-near/engine/lib/engine";
+import { useEffect, useState } from "react";
 
 export const TGas = Big(10).pow(12);
 export const MaxGasPerTransaction = TGas.mul(300);
@@ -172,7 +173,33 @@ async function _initNear() {
   return _near;
 }
 
-const defaultNear = Promise.resolve(_initNear());
+const defaultNearPromise = Promise.resolve(_initNear());
+export const useNearPromise = singletonHook(defaultNearPromise, () => {
+  return defaultNearPromise;
+});
+
+const defaultNear = null;
 export const useNear = singletonHook(defaultNear, () => {
-  return defaultNear;
+  const [near, setNear] = useState(defaultNear);
+  const _near = useNearPromise();
+
+  useEffect(() => {
+    _near.then(setNear);
+  }, [_near]);
+
+  return near;
+});
+
+const defaultAurora = null;
+export const useAurora = singletonHook(defaultAurora, () => {
+  const [aurora, setAurora] = useState(defaultAurora);
+  const near = useNear();
+
+  useEffect(() => {
+    if (near) {
+      setAurora(near.aurora);
+    }
+  }, [near]);
+
+  return aurora;
 });

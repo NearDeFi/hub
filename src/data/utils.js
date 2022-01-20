@@ -6,6 +6,8 @@ import {
 } from "./near";
 import React from "react";
 import Timer from "react-compound-timer";
+import { Address } from "@aurora-is-near/engine";
+import AbiCoder from "web3-eth-abi";
 
 const MinAccountIdLen = 2;
 const MaxAccountIdLen = 64;
@@ -156,4 +158,29 @@ export const tokenStorageDeposit = async (tokenAccountId) => {
   return isBridgeToken(tokenAccountId)
     ? BridgeTokenStorageDeposit
     : TokenStorageDeposit;
+};
+
+export const toAddress = (address) => {
+  return typeof address === "string"
+    ? Address.parse(address).unwrapOrElse(() => Address.zero())
+    : address;
+};
+
+export const buildInput = (abi, methodName, params) => {
+  const abiItem = abi.find((a) => a.name === methodName);
+  if (!abiItem) {
+    return null;
+  }
+  return AbiCoder.encodeFunctionCall(abiItem, params);
+};
+
+export const decodeOutput = (abi, methodName, buffer) => {
+  const abiItem = abi.find((a) => a.name === methodName);
+  if (!abiItem) {
+    return null;
+  }
+  return AbiCoder.decodeParameters(
+    abiItem.outputs,
+    `0x${buffer.toString("hex")}`
+  );
 };
