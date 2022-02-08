@@ -563,6 +563,16 @@ const defaultTokenList = {
         "https://raw.githubusercontent.com/aurora-is-near/bridge-assets/master/tokens/yfi.svg",
       tags: ["ethereum"],
     },
+    {
+      chainId: 1313161554,
+      address: "0xC9BdeEd33CD01541e1eeD10f90519d2C06Fe3feB",
+      symbol: "WETH",
+      name: "Wrapped ETH",
+      decimals: 18,
+      logoURI:
+        "https://dappimg.com/media/image/token/a412fe82bd2c11eb8d1e0242ac130005.png",
+      tags: ["ethereum"],
+    },
   ],
   version: {
     major: 1,

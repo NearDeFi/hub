@@ -91,8 +91,8 @@ function App(props) {
       <Router basename={process.env.PUBLIC_URL}>
         <nav className="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
           <div className="container-fluid">
-            <a className="navbar-brand" href="https://wiki" title="wiki">
-              wiki
+            <a className="navbar-brand" href="/" title="Defi Hub">
+              Defi Hub
             </a>
             <button
               className="navbar-toggler"

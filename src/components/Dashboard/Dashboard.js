@@ -81,11 +81,14 @@ export default function Dashboard(props) {
     <div>
       <div>Account: {address.toString()}</div>
       <div>
-        <button className="btn btn-primary" onClick={(e) => depositWNear(e, 1)}>
+        <button
+          className="btn btn-primary m-1"
+          onClick={(e) => depositWNear(e, 1)}
+        >
           Deposit 1 wNEAR
         </button>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary m-1"
           onClick={(e) => withdrawWNear(e, 1)}
         >
           Withdraw 1 wNEAR
